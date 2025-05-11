@@ -1,7 +1,7 @@
 import React from "react"
 import { Pressable, StyleSheet, Text, View } from "react-native"
 import { format } from "date-fns"
-import Feather from "@expo/vector-icons/Feather"
+import { Feather, FontAwesome5 } from "@expo/vector-icons"
 import { colors } from "@/constants/token"
 import { defaultStyles } from "@/styles"
 
@@ -16,16 +16,26 @@ interface Props {
   note: Note
   onPress: () => void
   onDelete: () => void
+  onLongPress: () => void
 }
 
-export function Note({ note, onPress, onDelete }: Props) {
+export function Note({ note, onPress, onDelete, onLongPress }: Props) {
   return (
     <View style={styles.container}>
-      <Pressable onPress={onPress} style={styles.noteContent}>
+      <Pressable
+        onPress={onPress}
+        style={styles.noteContent}
+        onLongPress={onLongPress}
+      >
         <View style={styles.content}>
-          <Text style={[defaultStyles.boldText, styles.noteTitle]}>
-            {note.title || "Untitled Note"}
-          </Text>
+          <View style={{ flexDirection: "row", alignItems: "center" }}>
+            <Text style={[defaultStyles.boldText, styles.noteTitle]}>
+              {note.title || "Untitled Note"}
+            </Text>
+            {(note as any).isPrivate && (
+              <FontAwesome5 name="lock" size={20} color={colors.text} />
+            )}
+          </View>
           <Text style={styles.noteDate}>
             {format(note.modifiedDate || new Date(), "MMM d, yyyy")}
           </Text>
@@ -58,9 +68,10 @@ const styles = StyleSheet.create({
   },
   noteTitle: {
     fontSize: 28,
+    marginRight: 8,
   },
   noteDate: {
-    fontFamily: "Inter-Regular",
+    fontFamily: "Inter",
     fontSize: 13,
     color: "#8E8E93",
     marginBottom: 6,

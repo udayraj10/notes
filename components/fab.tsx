@@ -1,4 +1,4 @@
-import { Pressable, StyleSheet } from "react-native"
+import { StyleSheet, TouchableOpacity } from "react-native"
 import React from "react"
 import { FontAwesome6 } from "@expo/vector-icons"
 import { colors } from "@/constants/token"
@@ -9,17 +9,17 @@ type FabProps = {
 
 export const Fab = ({ onPress }: FabProps) => {
   return (
-    <Pressable style={styles.fab} onPress={onPress}>
+    <TouchableOpacity style={styles.fab} onPress={onPress}>
       <FontAwesome6 name="add" size={24} color="black" />
-    </Pressable>
+    </TouchableOpacity>
   )
 }
 
 const styles = StyleSheet.create({
   fab: {
     position: "absolute",
-    right: 10,
-    bottom: 10,
+    right: 20,
+    bottom: 40,
     width: 56,
     height: 56,
     borderRadius: 28,

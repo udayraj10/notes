@@ -8,11 +8,11 @@ export const defaultStyles = StyleSheet.create({
     position: "relative",
   },
   text: {
-    fontFamily: "Inter-Regular",
+    fontFamily: "Inter",
     color: colors.text,
   },
   boldText: {
-    fontFamily: "Inter-Bold",
+    fontFamily: "InterBold",
     color: colors.text,
   },
 })

@@ -2,7 +2,7 @@ import { Pressable, StyleSheet, Text, TextInput, View } from "react-native"
 import { SafeAreaView } from "react-native-safe-area-context"
 import { colors } from "@/constants/token"
 import { defaultStyles } from "@/styles"
-import { Feather } from "@expo/vector-icons"
+import { Entypo } from "@expo/vector-icons"
 import { FC } from "react"
 
 type NoteScreenProps = {
@@ -16,7 +16,7 @@ type NoteScreenProps = {
   handleContentChange: (text: string) => void
 }
 
-export const NoteScreen: FC<NoteScreenProps> = ({
+export const NoteScreenUI: FC<NoteScreenProps> = ({
   title,
   saveNote,
   note,
@@ -27,9 +27,8 @@ export const NoteScreen: FC<NoteScreenProps> = ({
     <SafeAreaView style={defaultStyles.container}>
       <View style={styles.headerContainer}>
         <Text style={[defaultStyles.boldText, { fontSize: 28 }]}>{title}</Text>
-
-        <Pressable onPress={saveNote}>
-          <Feather name="check" size={24} color={colors.text} />
+        <Pressable onPress={saveNote} style={{ marginRight: 10 }}>
+          <Entypo name="check" size={24} color={colors.text} />
         </Pressable>
       </View>
       <View style={styles.content}>
@@ -46,7 +45,7 @@ export const NoteScreen: FC<NoteScreenProps> = ({
           style={[defaultStyles.text, styles.contentInput]}
           value={note.content}
           onChangeText={handleContentChange}
-          placeholder="Note"
+          placeholder="Content"
           placeholderTextColor="#8E8E93"
           multiline
           textAlignVertical="top"
@@ -68,13 +67,12 @@ const styles = StyleSheet.create({
   content: {
     flex: 1,
     backgroundColor: colors.background,
+    padding: 10,
   },
   titleInput: {
+    height: 60,
     fontSize: 30,
     paddingHorizontal: 10,
-    marginBottom: 16,
-    borderColor: colors.borderColor,
-    borderBottomWidth: 1,
   },
   contentInput: {
     flex: 1,

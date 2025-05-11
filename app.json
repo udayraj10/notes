@@ -4,7 +4,6 @@
     "slug": "Notes",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/adaptive-icon.png",
     "scheme": "myapp",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
@@ -14,13 +13,14 @@
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
-        "backgroundColor": "#fff"
-      }
+        "backgroundColor": "#ffffff"
+      },
+      "package": "com.udayraj10.Notes"
     },
     "web": {
       "bundler": "metro",
       "output": "static",
-      "favicon": "./assets/images/favicon.png"
+      "favicon": "./assets/images/icon.png"
     },
     "plugins": [
       "expo-router",
@@ -28,8 +28,9 @@
         "expo-splash-screen",
         {
           "image": "./assets/images/splash-icon-light.png",
+          "imageWidth": 400,
           "resizeMode": "contain",
-          "backgroundColor": "#fff"
+          "backgroundColor": "#010101"
         }
       ],
       "expo-sqlite",
@@ -37,6 +38,15 @@
     ],
     "experiments": {
       "typedRoutes": true
-    }
+    },
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "f7150a6b-911d-4fda-a52a-dd68099992a3"
+      }
+    },
+    "owner": "udayraj10"
   }
 }

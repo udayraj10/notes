@@ -38,7 +38,7 @@ const App = () => {
 const RootNavigation = () => {
   return (
     <SQLiteProvider
-      databaseName="notes-app.db"
+      databaseName="notes.db"
       onInit={async (db: SQLiteDatabase) => {
         const DATABASE_VERSION = 1
 
@@ -55,11 +55,11 @@ const RootNavigation = () => {
           // Initial migration
           await db.execAsync(`
               CREATE TABLE IF NOT EXISTS notes (
-                id NUMBER PRIMARY KEY NOT NULL,
-                title TEXT,
-                content TEXT,
-                modifiedDate TEXT
-              );
+              id INTEGER PRIMARY KEY AUTOINCREMENT,
+              title TEXT,
+              content TEXT,
+              modifiedDate TEXT,
+              isPrivate INTEGER DEFAULT 0);
             `)
           await db.execAsync(`PRAGMA user_version = ${DATABASE_VERSION}`)
           console.log(
@@ -75,14 +75,26 @@ const RootNavigation = () => {
         >
           <Stack
             screenOptions={{
-              headerShown: false,
               animation: "flip",
               gestureEnabled: true,
             }}
           >
-            <Stack.Screen name="(tabs)" />
-            <Stack.Screen name="note/normalScreen" />
-            <Stack.Screen name="note/privateScreen" />
+            <Stack.Screen
+              name="index"
+              options={{
+                headerShown: true,
+                title: "Notes",
+                headerStyle: {
+                  backgroundColor: colors.bg200,
+                },
+                headerTitleStyle: {
+                  fontFamily: "InterBold",
+                  fontSize: 30,
+                  color: colors.text,
+                },
+              }}
+            />
+            <Stack.Screen name="note/[id]" options={{ headerShown: false }} />
           </Stack>
         </GestureHandlerRootView>
       </NotesProvider>

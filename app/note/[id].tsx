@@ -2,9 +2,9 @@ import React, { useEffect, useState } from "react"
 import { useLocalSearchParams, useRouter } from "expo-router"
 import { Note, useNotes } from "../../context/NotesContext"
 import { useSQLiteContext } from "expo-sqlite"
-import { NoteScreen } from "@/components/NoteScreen"
+import { NoteScreenUI } from "@/components/NoteScreenUI"
 
-export default function NormalNoteScreen() {
+export default function NoteScreen() {
   const { id } = useLocalSearchParams<{ id: string }>()
   const db = useSQLiteContext()
   const router = useRouter()
@@ -31,7 +31,7 @@ export default function NormalNoteScreen() {
       }
     }
     fetchNote()
-  }, [id, db])
+  }, [id, db, isNewNote])
 
   const saveNote = async () => {
     if (!note.title && !note.content) {
@@ -53,7 +53,7 @@ export default function NormalNoteScreen() {
         if (newNote) {
           setIsNewNote(false)
           router.replace({
-            pathname: "/note/normalScreen",
+            pathname: "/note/[id]",
             params: { id: String(newNote.id) },
           })
           router.back()
@@ -83,7 +83,7 @@ export default function NormalNoteScreen() {
   }
 
   return (
-    <NoteScreen
+    <NoteScreenUI
       title="Notes"
       saveNote={saveNote}
       note={note}
